@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: charity-backend
+    env: node
+    buildCommand: |
+      cd backend && \
+      npm install && \
+      npm install --save-dev @types/node @types/express @types/cors @types/morgan @types/helmet @types/cookie-parser @types/bcryptjs @types/jsonwebtoken @types/qrcode @types/mongoose @types/express-rate-limit @types/zod @types/jest @types/supertest && \
+      npm run build
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: CORS_ORIGIN
+        value: https://your-frontend-url.vercel.app
+      - key: PAYMENT_SECRET_KEY
+        sync: false
+      - key: PAYMENT_PUBLIC_KEY
+        sync: false 
