@@ -1,25 +1,24 @@
 services:
   - type: web
-    name: charity-backend
+    name: crowd-fund-backend
     env: node
-    buildCommand: |
-      cd backend && \
-      npm install && \
-      npm install --save-dev @types/node @types/express @types/cors @types/morgan @types/helmet @types/cookie-parser @types/bcryptjs @types/jsonwebtoken @types/qrcode @types/mongoose @types/express-rate-limit @types/zod @types/jest @types/supertest && \
-      npm run build
+    region: singapore
+    buildCommand: cd backend && npm install && npm run build
     startCommand: cd backend && npm start
     envVars:
+      - key: PORT
+        value: 5000
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: 10000
       - key: MONGODB_URI
         sync: false
       - key: JWT_SECRET
         sync: false
+      - key: UPI_ID
+        value: dhruv95@fam
       - key: CORS_ORIGIN
-        value: https://your-frontend-url.vercel.app
-      - key: PAYMENT_SECRET_KEY
+        value: https://crowd-fund-zeta.vercel.app
+      - key: ADMIN_SECRET_KEY
         sync: false
-      - key: PAYMENT_PUBLIC_KEY
-        sync: false 
+    healthCheckPath: /health
+    autoDeploy: true 
