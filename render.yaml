@@ -3,7 +3,11 @@ services:
     name: crowd-fund-backend
     env: node
     region: singapore
-    buildCommand: cd backend && npm install && npm run build
+    buildCommand: |
+      cd backend && \
+      npm install && \
+      npm install --save-dev @types/node @types/express @types/cors @types/morgan @types/helmet @types/cookie-parser @types/bcryptjs @types/jsonwebtoken @types/qrcode @types/mongoose @types/express-rate-limit @types/zod @types/jest @types/supertest && \
+      npm run build
     startCommand: cd backend && npm start
     envVars:
       - key: PORT
